@@ -1,0 +1,17 @@
+// Build image
+docker build -t node-app-image .
+
+// Run container
+docker run -v /Users/belchenkov/projects/nodejs/node-docker-swarm:/app -v /app/node_modules --env PORT=4000 -p 3000:4000 -d --name node-app node-app-image
+docker run -v /Users/belchenkov/projects/nodejs/node-docker-swarm:/app -v /app/node_modules --env-file ./.env -p 3000:4000 -d --name node-app node-app-image
+
+// Remove container
+docker rm node-app -f
+
+// Exec container
+docker exec -it node-app bash // linux
+docker exec -it node-app /bin/sh // macos
+
+// Show ENV variables
+printenv
+
