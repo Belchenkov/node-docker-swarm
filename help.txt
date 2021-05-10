@@ -7,11 +7,12 @@ docker run -v /Users/belchenkov/projects/nodejs/node-docker-swarm:/app -v /app/n
 
 // Remove container
 docker rm node-app -f
+docker rm node-app -fv // with volumes
 
 // Exec container
 docker exec -it node-app bash // linux
 docker exec -it node-app /bin/sh // macos
 
-// Show ENV variables
+// Show ENV variables into container
 printenv
 
