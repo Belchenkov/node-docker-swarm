@@ -8,9 +8,12 @@ const {
     MONGO_PORT
 } = require('./config/config');
 
-const app = express();
+const postRouter = require('./routes/postRoutes');
 
-const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
+const app = express();
+app.use(express.json());
+
+const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/db?authSource=admin`;
 
 mongoose.connect(mongoURL, {
     useNewUrlParser: true,
@@ -20,9 +23,12 @@ mongoose.connect(mongoURL, {
         console.log('Connected to DB...')
     }).catch(e => console.log(e));
 
+
 app.get('/', (req, res) => {
     res.send('<h2>Hi There</h2>');
 });
+
+app.use('/api/v1/posts', postRouter);
 
 const port = process.env.PORT || 3000;
 
