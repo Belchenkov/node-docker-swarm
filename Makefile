@@ -3,9 +3,8 @@ init-prod: down-prod build-prod up-prod
 
 up-dev:
 	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
-
 up-prod:
-	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d no=deps
 
 build-dev:
 	docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
